@@ -36,11 +36,11 @@ class Bank {
 			mythreads[i] = Executors.newFixedThreadPool(10);
 		}
 	}
-	public final void acquire(Account x){
-		locks[x.hashCode()].lock();
+	public final void acquire(int x){
+		locks[x].lock();
 	}
-	public void release(Account x){
-		locks[x.hashCode()].unlock();
+	public final void release(int x){
+		locks[x].unlock();
 	}
 	public class Initialize implements Runnable {
 		int id;
@@ -98,8 +98,35 @@ class Bank {
         	} 
 		}
 	}
+	public class Remove implements Runnable {
+		long acc_no;
+		public Remove(long acc_no){
+			this.acc_no = acc_no;
+		}
+		@Override
+		public void run(){
+			int idx = (int)(acc_no/min);
+			for(int i = 0; i < table.get(idx).size(); i++){
+				Account c = table.get(idx).get(i);
+				if(c.no == acc_no){
+					Account p = table.get(idx).remove(i);
+					break;
+				}
+			}
+		}
+	}
+	public class Add implements Runnable {
+		long acc_no;
+		public Add(long acc_no){
+			this.acc_no = acc_no;
+		}
+		@Override
+		public void run(){
+
+		}
+	}
 	public void calculate(ArrayList<ArrayList<Long>> arr){
-		for(int i=0;i<arr.size();i++)
+		for(int i = 0; i < arr.size(); i++)
 		{
 			int p = (int)(arr.get(i).get(1)/min);
 
@@ -116,6 +143,20 @@ class Bank {
 				mythreads[p].execute(new Withdraw(arr.get(i).get(1),arr.get(i).get(3)));
 				p = (int)(arr.get(i).get(2)/min);
 				mythreads[p].execute(new Deposit(arr.get(i).get(2),arr.get(i).get(3)));
+			}
+			// delete
+			else if(arr.get(i).get(0) == 4){
+				acquire(p);
+				try {
+					mythreads[p].execute(new Remove(arr.get(i).get(1)));		
+				}
+				finally {
+					release(p);
+				}
+			}
+			// transfer 
+			else if(arr.get(i).get(0) == 5){
+				
 			}
 		}
 	}
