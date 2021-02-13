@@ -10,8 +10,6 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.Collections;
 import java.io.FileWriter; 
-import java.util.concurrent.Callable; 
-import java.util.concurrent.Future; 
 
 class Account {
 	Long amount;
@@ -101,7 +99,6 @@ class Bank {
 				return;
 			}
 			Node newNode = new Node(a.account);
-			newNode.amount = a.amount;
 			newNode.next = curr;
 			pred.next = newNode;
 			return;
@@ -164,13 +161,14 @@ class Bank {
 			add(a);
 		}	
 	}
-	public class Delete implements Callable<Long> {
+	public class Delete implements Runnable {
 		Account a;
 		public Delete(Account a){
 			this.a = a;
 		} 
-		public Long call() throws Exception {
-			return remove(a);
+		@Override
+		public void run(){
+			remove(a);
 		}	
 	}
 	public void calculate(ArrayList<ArrayList<Long>> arr){
@@ -205,32 +203,21 @@ class Bank {
 			// delete account
 			else if(arr.get(i).get(0) == 5){
 				Account a = new Account(arr.get(i).get(1),0L);
-				Future<Long> x = mythreads[p].submit(new Delete(a));
-				try {
-					System.out.println(x.get());
-				}	
-				catch(Throwable t){
-
-				}
+				mythreads[p].execute(new Delete(a));		
 			}
 			// transfer account
 			else if(arr.get(i).get(0) == 6){
 				Account a = new Account(arr.get(i).get(1),0L);
-				Future<Long> x = mythreads[p].submit(new Delete(a));
+				mythreads[p].execute(new Delete(a));
 
 				Long temp = arr.get(i).get(1);
 				temp -= min*p;
 				temp += min*(arr.get(i).get(2));
-				p = arr.get(i).get(2).intValue();
+				Long p1 = arr.get(i).get(2);
+				p = p1.intValue();
 
-				try {
-					a = new Account(temp,x.get());
-					System.out.println(x.get());
-					mythreads[p].execute(new Add(a));
-				}
-				catch(Throwable t){
-
-				}
+				a = new Account(temp,0L);
+				mythreads[p].execute(new Add(a));
 			}
 		}
 		for(int i = 0; i < 10; i++){

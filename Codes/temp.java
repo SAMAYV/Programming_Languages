@@ -3,6 +3,9 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.io.File; 
+import java.io.FileWriter; 
+import java.io.IOException; 
 
 class Account {
 	long no;
@@ -49,7 +52,7 @@ class Bank {
 		}
 		@Override
 		public void run(){
-			for(int i=0;i<1000;i++){
+			for(int i=0;i<1;i++){
 				long rand_account_no = (long)(id*min + (long)(Math.random()*min));
 				long rand_amount = (long)(min*(Math.random()));
 				table.get(id).add(new Account(rand_account_no, rand_amount));
@@ -119,7 +122,7 @@ class Bank {
 		long acc_no;
 		public Add(long acc_no){
 			this.acc_no = acc_no;
-		}
+		} 
 		@Override
 		public void run(){
 
@@ -173,27 +176,54 @@ class Test {
 		Bank c = new Bank();
 		c.start();
 		
-		Scanner sc = new Scanner(System.in);
-		ArrayList<ArrayList<Long>> arr = new ArrayList<ArrayList<Long>>();
-		
-		int rows = sc.nextInt();
-		for(int i=0;i<rows;i++){
-			Long type = sc.nextLong();
-			ArrayList<Long> curr = new ArrayList<Long>();
-			curr.add(type);
-			if(type == 1){
-				Long acc = sc.nextLong();
-				Long amt = sc.nextLong();
-				curr.add(acc);
-				curr.add(amt);
-			}
-			arr.add(curr);
-		}
-		c.calculate(arr);
-
 		for(int i=0;i<10;i++){
 			c.mythreads[i].shutdown();
 			while(!c.mythreads[i].isTerminated()){}
 		}
+
+		FileWriter ac = null, am = null;
+		try {
+			ac = new FileWriter("output_account.txt");
+			am = new FileWriter("output_amount.txt");
+		}
+		catch(IOException fe){}
+
+		for(int i = 0; i < 10; i++){
+			for(int j = 0; j < c.table.get(i).size(); j++){
+				try {
+					ac.write(c.table.get(i).get(j).no + " ");
+					am.write(c.table.get(i).get(j).value + " ");	
+				}
+				catch(IOException fe){}
+			}
+			try {
+				ac.write("\n");
+				am.write("\n");	
+			}
+			catch(IOException fe){}
+		}
+		try {
+			ac.close();	
+			am.close();
+		}
+		catch(IOException fe){}
+		
+		// Scanner sc = new Scanner(System.in);
+		// ArrayList<ArrayList<Long>> arr = new ArrayList<ArrayList<Long>>();
+		
+		// int rows = sc.nextInt();
+		// for(int i=0;i<rows;i++){
+		// 	Long type = sc.nextLong();
+		// 	ArrayList<Long> curr = new ArrayList<Long>();
+		// 	curr.add(type);
+		// 	if(type == 1){
+		// 		Long acc = sc.nextLong();
+		// 		Long amt = sc.nextLong();
+		// 		curr.add(acc);
+		// 		curr.add(amt);
+		// 	}
+		// 	arr.add(curr);
+		// }
+		// c.calculate(arr);
 	}
 }
