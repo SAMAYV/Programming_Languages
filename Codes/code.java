@@ -204,7 +204,7 @@ class Bank {
 				Account a = new Account(arr.get(i).get(1),0L);
 				Future<Long> x = mythreads[p].submit(new Delete(a));
 				try {
-					System.out.println(x.get());
+					
 				}	
 				catch(Throwable t){
 
@@ -222,7 +222,6 @@ class Bank {
 
 				try {
 					a = new Account(temp,x.get());
-					System.out.println(x.get());
 					mythreads[p].execute(new Add(a));
 				}
 				catch(Throwable t){
@@ -289,8 +288,8 @@ class Assign {
 		// writing before processing transactions
 		FileWriter ac2 = null, am2 = null;
 		try {
-			ac2 = new FileWriter("final0_account.txt");
-			am2 = new FileWriter("final0_amount.txt");
+			ac2 = new FileWriter("sorted_account.txt");
+			am2 = new FileWriter("sorted_amount.txt");
 		}
 		catch(IOException fe){}
 
@@ -317,7 +316,7 @@ class Assign {
 		catch(IOException fe){}
 		
 		// processing transactions
-		File queries = new File("queries1.txt");
+		File queries = new File("queries.txt");
 		Scanner query = null;
 		try {
 			query = new Scanner(queries);
