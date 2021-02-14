@@ -317,7 +317,7 @@ class Assign {
 		catch(IOException fe){}
 		
 		// processing transactions
-		File queries = new File("queries1.txt");
+		File queries = new File("queries.txt");
 		Scanner query = null;
 		try {
 			query = new Scanner(queries);
