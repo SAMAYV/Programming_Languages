@@ -13,6 +13,8 @@ ll const maxn = 1e9;
 int main()
 {
 	i_os;
+	ll n,m;
+	cin>>n>>m;
 	fstream f1,f2,f3,f4,f5;
 	f1.open("input_account.txt",ios::out);
 	f2.open("input_amount.txt",ios::out);
@@ -24,7 +26,7 @@ int main()
 	map<ll,ll> mp;
 
 	REP(i,0,10){
-		REP(j,0,10000){
+		REP(j,0,n){
 			ll acc = rand() % maxn + maxn*i;
 			while(mp.count(acc)){
 				acc = rand() % maxn + maxn*i;
@@ -36,7 +38,7 @@ int main()
 	}
 	REP(i,0,10){
 		sort(table[i].begin(),table[i].end());
-		REP(j,0,10000){
+		REP(j,0,n){
 			f1 << table[i][j].first << " ";
 			f2 << table[i][j].second << " ";
 		}
@@ -51,7 +53,7 @@ int main()
 	vector<ll> operations(7,0);
 	ll iter = 0;
 
-	while(iter < 100000){
+	while(iter < m){
 		ll opr = rand() % 7;
 		if(opr == 1){
 			ll row = rand() % 10;
@@ -103,9 +105,10 @@ int main()
 			while(mp.count(acc)){
 				acc = rand() % 10000000000;
 			}
+			ll amt = rand() % maxn;
 			mp[acc] = 1;
-			output.push_back({4, acc});
-			table[acc/maxn].push_back({acc,0});
+			output.push_back({4, acc, amt});
+			table[acc/maxn].push_back({acc,amt});
 			size[acc/maxn]++;
 			iter++;
 			operations[opr]++;

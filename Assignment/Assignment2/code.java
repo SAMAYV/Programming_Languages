@@ -200,7 +200,7 @@ class Bank {
 			}
 			// add account
 			else if(arr.get(i).get(0) == 4){
-				Account a = new Account(arr.get(i).get(1),0L);
+				Account a = new Account(arr.get(i).get(1),arr.get(i).get(2));
 				mythreads[p].execute(new Add(a));
 			}
 			// delete account
@@ -237,6 +237,7 @@ class Bank {
 class Assign {
 	public static void main(String args[])
 	{
+		int per_branch = Integer.parseInt(args[0]);
 		Bank b = new Bank();
 		File ac = new File("input_account.txt");
 		File am = new File("input_amount.txt");
@@ -252,7 +253,7 @@ class Assign {
 		// building the hash table and linked list
 		for(int j = 0; j < 10; j++){
 			Node n = b.table[j];
-			for(int i = 0; i < 10000; i++){
+			for(int i = 0; i < per_branch; i++){
 				String word1 = input.next();
    				String word2 = input1.next();
    				long acc = Long.parseLong(word1);
