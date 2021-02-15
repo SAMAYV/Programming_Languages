@@ -52,7 +52,7 @@ class Bank {
 		}
 		@Override
 		public void run(){
-			for(int i=0;i<1;i++){
+			for(int i=0;i<10;i++){
 				long rand_account_no = (long)(id*min + (long)(Math.random()*min));
 				long rand_amount = (long)(min*(Math.random()));
 				table.get(id).add(new Account(rand_account_no, rand_amount));
