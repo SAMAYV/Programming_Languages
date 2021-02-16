@@ -133,33 +133,48 @@ class Bank {
 		{
 			int p = (int)(arr.get(i).get(1)/min);
 
-			// withdraw
+			// withdraw money
 			if(arr.get(i).get(0) == 1){
-				mythreads[p].execute(new Withdraw(arr.get(i).get(1),arr.get(i).get(2)));
+				Account a = new Account(arr.get(i).get(1),-arr.get(i).get(2));
+				mythreads[p].execute(new Withdraw(a));
 			}
-			// deposit
+			// deposit money
 			else if(arr.get(i).get(0) == 2){
-				mythreads[p].execute(new Deposit(arr.get(i).get(1),arr.get(i).get(2)));	
+				Account a = new Account(arr.get(i).get(1),arr.get(i).get(2));
+				mythreads[p].execute(new Deposit(a));	
 			}
-			// transfer
+			// transfer money
 			else if(arr.get(i).get(0) == 3){
-				mythreads[p].execute(new Withdraw(arr.get(i).get(1),arr.get(i).get(3)));
+				Account a = new Account(arr.get(i).get(1),-arr.get(i).get(3));
+				mythreads[p].execute(new Withdraw(a));
+
 				p = (int)(arr.get(i).get(2)/min);
-				mythreads[p].execute(new Deposit(arr.get(i).get(2),arr.get(i).get(3)));
+				a = new Account(arr.get(i).get(2),arr.get(i).get(3));
+				mythreads[p].execute(new Deposit(a));
 			}
-			// delete
+			// add account
 			else if(arr.get(i).get(0) == 4){
-				acquire(p);
-				try {
-					mythreads[p].execute(new Remove(arr.get(i).get(1)));		
-				}
-				finally {
-					release(p);
-				}
+				Account a = new Account(arr.get(i).get(1),0L);
+				mythreads[p].execute(new Add(a));
 			}
-			// transfer 
+			// delete account
 			else if(arr.get(i).get(0) == 5){
-				
+				Account a = new Account(arr.get(i).get(1),0L);
+				mythreads[p].execute(new Delete(a));		
+			}
+			// transfer account
+			else if(arr.get(i).get(0) == 6){
+				Account a = new Account(arr.get(i).get(1),0L);
+				mythreads[p].execute(new Delete(a));
+
+				Long temp = arr.get(i).get(1);
+				temp -= min*p;
+				temp += min*(arr.get(i).get(2));
+				Long p1 = arr.get(i).get(2);
+				p = p1.intValue();
+
+				a = new Account(temp,0L);
+				mythreads[p].execute(new Add(a));
 			}
 		}
 	}
