@@ -55,3 +55,25 @@ prime n = factors n == [1,n]
 
 primes :: Int -> [Int]
 primes n = [x | x <- [2..n], prime x]
+
+pairs :: [a] -> [(a,a)]
+pairs xs = zip xs (tail xs)
+
+sorted :: Ord a => [a] -> Bool
+sorted xs =
+  and [x <= y | (x,y) <- pairs xs]
+
+count :: Char -> String -> Int
+count x xs =
+  length [x' | x' <- xs, x == x']
+
+addition :: Integer -> Integer
+addition n = foldr (+) 0 [1..n]
+
+prod :: Integer -> Integer
+prod n = foldr (*) 1 [1..n]
+
+sumT acc ls = foldl (+) acc ls
+
+sumList ls = sumT 0 ls
+
