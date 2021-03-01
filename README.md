@@ -1,1 +1,1 @@
-# Programming Languages Lab
+- This repository contains the assignments given in the course CS331 in 2021
