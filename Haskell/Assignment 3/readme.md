@@ -2,7 +2,7 @@
 # Roll Number: 180101097
 # CS 331 Assignment 3
 
-# Question 1
+# Question 1 - square root of number
 
 - Instructions to run the code:
 	1) ghci
@@ -22,7 +22,7 @@
 	5) squareroot 100000000
 
 
-# Question 2
+# Question 2 - nth fibonacci number
 
 - Instructions to run the code:
 	1) ghci
@@ -42,7 +42,7 @@
 	5) fibonacci 100000
 
 
-# Question 3
+# Question 3 - quick sort
 
 - Instructions to run the code:
 	1) ghci
