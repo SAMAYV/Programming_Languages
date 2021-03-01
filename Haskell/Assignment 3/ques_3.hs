@@ -1,4 +1,4 @@
-quicksort :: [Integer] -> [Integer]
+quicksort :: Ord a => [a] -> [a]
 quicksort [] = []
 quicksort [a] = [a]
 quicksort q = quicksort q1 ++ [e] ++ quicksort q2 

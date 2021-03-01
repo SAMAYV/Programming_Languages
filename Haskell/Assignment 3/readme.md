@@ -19,7 +19,7 @@
 	2) squareroot 123.57
 	3) squareroot 10987.20943
 	4) squareroot 1000294893.10923
-	5) squareroot 100000000
+	5) squareroot 0.0112343
 
 
 # Question 2 - nth fibonacci number
@@ -60,3 +60,4 @@
 	3) quicksort []
 	4) quicksort [1]
 	5) quicksort [9,8,7,6,5,4,3,2,1,0]
+	6) quicksort [1,2,1.1,4.9,3,9.4,5.6]
