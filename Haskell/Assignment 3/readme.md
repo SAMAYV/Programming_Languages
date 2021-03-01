@@ -9,10 +9,9 @@
 	2) :l ques_1.hs
 
 - Instructions to run Test Cases:
-	1) squareroot <number> 
+	1) squareroot <input_number> 
 	
-	Example: Input:  squareroot 10
-			 Output: 3.162277665175675
+	Example: Input: squareroot 10, Output: 3.162277665175675
 
 - Test Cases
 	1) squareroot 23.56
@@ -29,10 +28,9 @@
 	2) :l ques_2.hs
 
 - Instructions to run Test Cases:
-	1) fibonacci <number> 
+	1) fibonacci <input_number> 
 	
-	Example: Input:  fibonacci 10
-			 Output: 55
+	Example: Input: fibonacci 10, Output: 55
 
 - Test Cases
 	1) fibonacci 6
@@ -51,8 +49,7 @@
 - Instructions to run Test Cases:
 	1) quicksort <list_of_numbers> 
 	
-	Example: Input:  quicksort [12,2,5,4,8]
-			 Output: [2,4,5,8,12]
+	Example: Input: quicksort [12,2,5,4,8], Output: [2,4,5,8,12]
 
 - Test Cases
 	1) quicksort [0,1,0,1,0]
