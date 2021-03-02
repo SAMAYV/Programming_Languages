@@ -19,6 +19,10 @@
 	3) squareroot 10987.20943
 	4) squareroot 1000294893.10923
 	5) squareroot 0.0112343
+	6) squareroot 0.000001234589
+	7) squareroot 3
+	8) squareroot 0
+	9) squareroot 10000
 
 
 # Question 2 - nth fibonacci number
@@ -38,6 +42,10 @@
 	3) fibonacci 198
 	4) fibonacci 1000
 	5) fibonacci 100000
+	6) fibonacci 1234
+	7) fibonacci 0
+	8) fibonacci 5
+	9) fibonacci 98765
 
 
 # Question 3 - quick sort
@@ -56,5 +64,8 @@
 	2) quicksort [1,9,8,9,1,2,3,2,5,4,5,8,9,0,1,3,2,1]
 	3) quicksort []
 	4) quicksort [1]
-	5) quicksort [9,8,7,6,5,4,3,2,1,0]
-	6) quicksort [1,2,1.1,4.9,3,9.4,5.6]
+	5) quicksort [1,2,1.1,4.9,3,9.4,5.6]
+	6) quicksort [1..1000]
+	7) quicksort ([1..100] ++ [1000..2000])
+	8) quicksort (reverse [1..1000])
+	9) quicksort (reverse ([1..10] ++ [100..120]))
