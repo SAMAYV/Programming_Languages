@@ -66,6 +66,6 @@
 	4) quicksort [1]
 	5) quicksort [1,2,1.1,4.9,3,9.4,5.6]
 	6) quicksort [1..1000]
-	7) quicksort ([1..100] ++ [1000..2000])
+	7) quicksort ([1..100] ++ reverse([1000..2000]))
 	8) quicksort (reverse [1..1000])
 	9) quicksort (reverse ([1..10] ++ [100..120]))

@@ -8,6 +8,7 @@ quicksort [] = []
 quicksort [a] = [a]
 
 -- using list comprehension and recursion to calculate quicksort for current list q
+-- q1 is the list having elements <= last element and q2 is the list having elements > last element
 quicksort q = quicksort q1 ++ [e] ++ quicksort q2 
                 where 
                  e = last q
