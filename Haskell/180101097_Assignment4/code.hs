@@ -2,11 +2,11 @@ import Data.List.Split
 import Data.Char
 
 -- function used to convert list values from string to integer
-string_to_int :: [String] -> [Int]
+string_to_int :: [String] -> [Integer]
 string_to_int = map read
 
 -- function to generate the lcm of the list of values
-generate_lcm :: [Int] -> Int
+generate_lcm :: [Integer] -> Integer
 generate_lcm [] = 1
 generate_lcm (x:xs) = lcm x (generate_lcm xs)
 
@@ -43,8 +43,9 @@ postorder (Node tl x tr) = postorder tl ++ postorder tr ++ [x]
 -- Main function used to take input from the user and is responsible for calling all other functions
 main :: IO ()
 main = do 
-
+       
       -- Prompting the user to enter numbers seperated by commas
+      putStrLn ""
       putStrLn "Enter list of numbers separated by commas: "
       xs <- getLine
       putStrLn ""
@@ -59,26 +60,26 @@ main = do
       let tree = maketree my_list
 
       -- Printing the list
-      putStrLn "List of numbers entered by the user: "
+      putStrLn "A) List of numbers entered by the user: "
       print my_list
       putStrLn ""
 
       -- Printing the LCM
-      putStrLn "LCM of the numbers: "
+      putStrLn "B) LCM of the numbers: "
       print lcm_value
       putStrLn ""
 
       -- Printing Inorder tree traversal
-      putStrLn "Inorder traversal of the BST: "
+      putStrLn "C) Inorder traversal of the BST: "
       print (inorder tree)
       putStrLn ""
 
       -- Printing Preorder tree traversal
-      putStrLn "Preorder traversal of the BST: "
+      putStrLn "C) Preorder traversal of the BST: "
       print (preorder tree)
       putStrLn ""
 
       -- Printing Postorder tree traversal
-      putStrLn "Postorder traversal of the BST: "
+      putStrLn "C) Postorder traversal of the BST: "
       print (postorder tree)
       putStrLn ""
