@@ -1,0 +1,10 @@
+sublist([],[]):-
+	write("Yes").
+sublist([],[_]):-
+	write("Yes").
+sublist([_],[]):-
+	write("No").
+sublist([X|L],[X|T]):-
+	sublist(L,T).	
+sublist(L,[_|T]):-
+	sublist(L,T).
