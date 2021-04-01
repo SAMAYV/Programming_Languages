@@ -1,10 +1,19 @@
-findroot(X, _Result, Acc):- squareroot(X, div(X, 2), Acc).
+% predicate to initialize the value of result
 
-squareroot(X, Result, Acc):-
-	abs(Result*Result - X) >= Acc,
-	squareroot(X, Res, Acc),
-	Result is div((Res + div(X, Res)), 2).
+findroot(X, Accuracy):- M is X/2,
+						squareroot(X, M, Accuracy).
 
-squareroot(X, Result, Acc):-
-	abs(Result*Result - X) < Acc,
+% predicate to find result 			
+					
+squareroot(X, Result, Accuracy):-
+	abs(Result*Result - X, Z),
+	Z >= Accuracy,
+	NewRes is (Result + X/Result)/2,
+	squareroot(X, NewRes, Accuracy).
+
+% predicate to output the result
+
+squareroot(X, Result, Accuracy):-
+	abs(Result*Result - X, Z),
+	Z < Accuracy,
 	write(Result).
