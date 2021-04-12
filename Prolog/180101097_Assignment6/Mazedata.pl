@@ -392,5 +392,3 @@ mazelink(98,97).
 mazelink(98,99).
 mazelink(99,89).
 mazelink(99,98).
-Start:=11.
-Finish:=99.
