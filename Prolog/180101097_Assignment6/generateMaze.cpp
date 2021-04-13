@@ -3,9 +3,9 @@
  *  
  *  Program to generate Maze file for testing
  *
- *  $g++ genrateMaze.cpp -o genrateMaze
- *   *  $ ./genrateMaze Height:int Width:int FaultProbability:fp<0,1> SrcX SrcY DstX DstY
- *  Example $./genrateMaze 10 10 0.3 1 1 9 9
+ *  $g++ generateMaze.cpp -o generateMaze
+ *   *  $ ./generateMaze Height:int Width:int FaultProbability:fp<0,1> SrcX SrcY DstX DstY
+ *  Example $./generateMaze 10 10 0.3 1 1 9 9
  *
  *  It generate "Mazedata.pl" file with contain facts for prolog
  *  It also generate graph1.png, which shows the connectivity of Maze
@@ -71,6 +71,8 @@ int main(int argc, char*argv[]){
 	for(i=0;i<Height;i++)	
 		for(j=0;j<Width;j++) {
 				F[i][j]= ( (random()%100) < IntFaultProbability ) ? 1:0;
+				// Src and Dst cann't be Faulty Node; Override
+				F[srcX][srcY]=0; F[dstX][dstY]=0;
 				if (F[i][j]==1) {
 					MazeGraph<< i*Width+j
 						 <<"[shape=box,style=filled,color=red, pos=\""
@@ -85,7 +87,7 @@ int main(int argc, char*argv[]){
 	
 	// Src and Dst cann't be Faulty Node
 	F[srcX][srcY]=0; F[dstX][dstY]=0;
-	MazeGraph<<i*srcX+srcY<<"[style=filled,color=blue]\n";
+	MazeGraph<<i*srcX+srcY<<"[style=filled,color=green]\n";
 	MazeGraph<<i*dstX+dstY<<"[style=filled,color=green]\n";
 	//Create Link
 	MazeData<<"\n\n";
@@ -101,8 +103,8 @@ int main(int argc, char*argv[]){
 	 }
 	 MazeGraph<<"\n}\n";
 	 MazeGraph.close();
-	 MazeData<<"\nStart="<<i*srcX+srcY<<".";
-	 MazeData<<"\nFinish="<<i*dstX+dstY<<".";
+	 //MazeData<<"\nStart="<<i*srcX+srcY<<".";
+	 //MazeData<<"\nFinish="<<i*dstX+dstY<<".";
 	 MazeData.close();
 	// Create MazeGraph file in Png Format from DOT file
 	 system("dot -Kfdp -n -Tpng MazeGraph.dot -o graph1.png");
