@@ -43,9 +43,31 @@ reverse_list([],Z,Z).
 reverse_list([H|T],Z,Acc) :- reverse_list(T,Z,[H|Acc]).
 
 
+% loop for adding faulty nodes
+
+loop(0).
+loop(N) :- N > 0, read(No), assert(faultynode(No)), P is N - 1, loop(P). 
+
+
+% loop for removing faulty nodes
+
+loop1(0).
+loop1(N) :- N > 0, read(No), retract(faultynode(No)), P is N - 1, loop1(P).
+
+
+% loop for performing queries of adding and deleting
+
+queries() :- nl, writeln("Enter the number of faulty nodes you want to add: "), read(Num),
+			writeln("Enter all the nodes you want to make faulty"), loop(Num), nl,
+			writeln("Enter the number of faulty nodes you want to remove: "), read(Num1),
+			writeln("Enter all the faulty nodes you want to remove"), loop1(Num1), nl.
+
+
 % main predicate for finding the shortest path
 
-shortest_path(Start,End):- 
+shortest_path(Start,End) :- 
+	queries(),
+	writeln("Printing the shortest path in sometime:- "),
 	setof(X, find_all_paths([Start],End,1,X), O), 
 	find_min_length(O,L), 
 	find_solution(O,L,P), 
